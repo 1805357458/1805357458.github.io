@@ -85,7 +85,9 @@
 
       
     </header>
-     
+    
+
+    
     <div class="article-meta">
       <a href="/2022/07/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/" class="article-date">
   <time datetime="2022-07-26T13:28:26.000Z" itemprop="datePublished">2022-07-26</time>
@@ -114,6 +116,7 @@
 </div>
  
     </div>
+
       
     <div class="tocbot"></div>
 
@@ -121,22 +124,26 @@
 
 
   
-    <div class="article-entry" itemprop="articleBody">
+    <div class="article-entry" itemprop="articleBody" style="margin-top: -2.5rem">
        
   <h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><ul>
 <li><p>数据结构分类</p>
 <ul>
-<li>线性结构：数组、队列、链表、栈                                              两种存储方式：顺序存储、线性存储</li>
-<li>非线性结构：二维数组，广义表、树结构、图结构</li>
+<li><p>线性结构：数组、队列、链表、栈                                         </p>
+<p>两种存储方式：顺序存储、线性存储</p>
+</li>
+<li><p>非线性结构：二维数组，广义表、树结构、图结构</p>
+</li>
 </ul>
 </li>
 <li><p>算法</p>
+<p>目标：速度、占用内存</p>
+</li>
+<li><p>程序 &#x3D; 数据结构 + 算法</p>
 </li>
 </ul>
-<p>​		目标：速度、占用内存</p>
-<ul>
-<li>程序 &#x3D; 数据结构 + 算法</li>
-</ul>
+<span id="more"></span>
+
 <h1 id="二、稀疏数组"><a href="#二、稀疏数组" class="headerlink" title="二、稀疏数组"></a>二、稀疏数组</h1><p>就是对二维数组的压缩，第一行记录行列数和值总数，下面记录有意义的值的行列位置和值</p>
  <img src="C:\Users\FANG\AppData\Roaming\Typora\typora-user-images\image-20220713003447466.png" alt="image-20220713003447466" style="zoom:50%;" />
 
@@ -146,7 +153,7 @@
 <p>稀疏数组 转 二维数组<br>1.读取稀疏数组第一行，根据第一行创建原始二维数组chessArr2&#x3D;int[6][7]<br>2.读取稀疏数组后面的数据，赋给二维数组</p>
 </blockquote>
 <p>代码实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">//原始数组</span><br><span class="line">        int chessArr1[][] = new int[6][7];</span><br><span class="line">        chessArr1[1][2] = 1;</span><br><span class="line">        chessArr1[2][3] = 2;</span><br><span class="line">        System.out.println(&quot;原始数组：&quot;);</span><br><span class="line">        for(int[] row : chessArr1)&#123;</span><br><span class="line">            for(int data : row)&#123;</span><br><span class="line">                System.out.printf(&quot;%d\t&quot;,data);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //原始二维数组 转换 稀疏数组</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int i = 0; i &lt; 6; i++)&#123;</span><br><span class="line">            for (int j = 0; j &lt; 7;j++)&#123;</span><br><span class="line">                if (chessArr1[i][j] != 0)&#123;</span><br><span class="line">                    sum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;sum = &quot; + sum);</span><br><span class="line">        int sparseArr1[][] = new int[sum+1][3];</span><br><span class="line">        sparseArr1[0][0] = 6;</span><br><span class="line">        sparseArr1[0][1] = 7;</span><br><span class="line">        sparseArr1[0][2] = sum;</span><br><span class="line"></span><br><span class="line">        int count = 1;</span><br><span class="line">        for (int i = 0; i &lt; 6; i++)&#123;</span><br><span class="line">            for (int j = 0; j &lt; 7;j++)&#123;</span><br><span class="line">                if (chessArr1[i][j] != 0)&#123;</span><br><span class="line">                    sparseArr1[count][0] = i;</span><br><span class="line">                    sparseArr1[count][1] = j;</span><br><span class="line">                    sparseArr1[count][2] = chessArr1[i][j];</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;稀疏数组：&quot;);</span><br><span class="line">        for(int i = 0;i&lt;sparseArr1.length; i++)&#123;</span><br><span class="line">            System.out.printf(&quot;%d\t%d\t%d\t\n&quot;,sparseArr1[i][0],sparseArr1[i][1],sparseArr1[i][2]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //稀疏数组 转换 原始数组</span><br><span class="line">        int chessArr2[][] = new int[sparseArr1[0][0]][sparseArr1[0][1]];</span><br><span class="line"></span><br><span class="line">//        sparseArr1[0][0]=0;</span><br><span class="line">//        sparseArr1[0][1]=0;</span><br><span class="line">//        sparseArr1[0][2]=0;</span><br><span class="line">//        for(int[] row : sparseArr1)&#123;</span><br><span class="line">//            chessArr2[row[0]][row[1]] = row[2];</span><br><span class="line">//        &#125;</span><br><span class="line">        for(int i =1; i &lt; sparseArr1.length; i++)&#123;</span><br><span class="line">            chessArr2[sparseArr1[i][0]][sparseArr1[i][1]] = sparseArr1[i][2];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;恢复的原始数组：&quot;);</span><br><span class="line">        for(int[] row : chessArr2)&#123;</span><br><span class="line">            for(int data : row)&#123;</span><br><span class="line">                System.out.printf(&quot;%d\t&quot;,data);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原始数组</span></span><br><span class="line">        <span class="type">int</span> chessArr1[][] = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">6</span>][<span class="number">7</span>];</span><br><span class="line">        chessArr1[<span class="number">1</span>][<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">        chessArr1[<span class="number">2</span>][<span class="number">3</span>] = <span class="number">2</span>;</span><br><span class="line">        System.out.println(<span class="string">&quot;原始数组：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span>[] row : chessArr1)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> data : row)&#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;%d\t&quot;</span>,data);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//原始二维数组 转换 稀疏数组</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">7</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArr1[i][j] != <span class="number">0</span>)&#123;</span><br><span class="line">                    sum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;sum = &quot;</span> + sum);</span><br><span class="line">        <span class="type">int</span> sparseArr1[][] = <span class="keyword">new</span> <span class="title class_">int</span>[sum+<span class="number">1</span>][<span class="number">3</span>];</span><br><span class="line">        sparseArr1[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">6</span>;</span><br><span class="line">        sparseArr1[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">7</span>;</span><br><span class="line">        sparseArr1[<span class="number">0</span>][<span class="number">2</span>] = sum;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; <span class="number">7</span>;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArr1[i][j] != <span class="number">0</span>)&#123;</span><br><span class="line">                    sparseArr1[count][<span class="number">0</span>] = i;</span><br><span class="line">                    sparseArr1[count][<span class="number">1</span>] = j;</span><br><span class="line">                    sparseArr1[count][<span class="number">2</span>] = chessArr1[i][j];</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;稀疏数组：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i&lt;sparseArr1.length; i++)&#123;</span><br><span class="line">            System.out.printf(<span class="string">&quot;%d\t%d\t%d\t\n&quot;</span>,sparseArr1[i][<span class="number">0</span>],sparseArr1[i][<span class="number">1</span>],sparseArr1[i][<span class="number">2</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">//稀疏数组 转换 原始数组</span></span><br><span class="line">        <span class="type">int</span> chessArr2[][] = <span class="keyword">new</span> <span class="title class_">int</span>[sparseArr1[<span class="number">0</span>][<span class="number">0</span>]][sparseArr1[<span class="number">0</span>][<span class="number">1</span>]];</span><br><span class="line"></span><br><span class="line"><span class="comment">//        sparseArr1[0][0]=0;</span></span><br><span class="line"><span class="comment">//        sparseArr1[0][1]=0;</span></span><br><span class="line"><span class="comment">//        sparseArr1[0][2]=0;</span></span><br><span class="line"><span class="comment">//        for(int[] row : sparseArr1)&#123;</span></span><br><span class="line"><span class="comment">//            chessArr2[row[0]][row[1]] = row[2];</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span><span class="number">1</span>; i &lt; sparseArr1.length; i++)&#123;</span><br><span class="line">            chessArr2[sparseArr1[i][<span class="number">0</span>]][sparseArr1[i][<span class="number">1</span>]] = sparseArr1[i][<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;恢复的原始数组：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span>[] row : chessArr2)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> data : row)&#123;</span><br><span class="line">                System.out.printf(<span class="string">&quot;%d\t&quot;</span>,data);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -293,80 +300,17 @@
 <h2 id="7-6归并排序"><a href="#7-6归并排序" class="headerlink" title="7.6归并排序"></a>7.6归并排序</h2><p><img src="C:\Users\FANG\AppData\Roaming\Typora\typora-user-images\image-20220725140949110.png" alt="image-20220725140949110"></p>
 <h2 id="7-7归并排序"><a href="#7-7归并排序" class="headerlink" title="7.7归并排序"></a>7.7归并排序</h2><h1 id="八、查找算法"><a href="#八、查找算法" class="headerlink" title="八、查找算法"></a>八、查找算法</h1><h2 id="8-1-顺序（线性查找）"><a href="#8-1-顺序（线性查找）" class="headerlink" title="8.1.顺序（线性查找）"></a>8.1.顺序（线性查找）</h2><p>逐一查找</p>
 <h2 id="8-2-二分查找"><a href="#8-2-二分查找" class="headerlink" title="8.2.二分查找"></a>8.2.二分查找</h2><h2 id="8-3-插值查找"><a href="#8-3-插值查找" class="headerlink" title="8.3.插值查找"></a>8.3.插值查找</h2><h2 id="8-4-线性查找"><a href="#8-4-线性查找" class="headerlink" title="8.4.线性查找"></a>8.4.线性查找</h2> 
+
+
       <!-- reward -->
-      
-      <div id="reword-out">
-        <div id="reward-btn">
-          Donate
-        </div>
-      </div>
       
     </div>
     
 
     <!-- copyright -->
     
-    <div class="declare">
-      <ul class="post-copyright">
-        <li>
-          <i class="ri-copyright-line"></i>
-          <strong>Copyright： </strong>
-          
-          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
-          
-        </li>
-      </ul>
-    </div>
-    
     <footer class="article-footer">
        
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://fishqi.com/2022/07/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AE%97%E6%B3%95/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>  
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
 
     </footer>
@@ -378,12 +322,60 @@
     
       <a href="/2022/07/25/hello-world/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Hello World</div>
+        <div class="article-nav-title">Hexo常用命令</div>
       </a>
     
   </nav>
 
-  
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "RFaVmwzL75mJ1G4iYoaqRSEg-gzGzoHsz",
+    app_key: "cuvplmQiwPSLumWBVRwCOpsM",
+    path: window.location.pathname,
+    avatar: "mm",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
    
     
     <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
@@ -756,6 +748,23 @@
 </script>
 
 
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=1920863738&auto=0&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
     
     
 
