@@ -1,3 +1,9 @@
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+<script>
+ $(document).pjax('a[target!=_blank]', '#pjax-container',{fragment:'#pjax-container', timeout:8000})
+</script>
+
 <!DOCTYPE html>
 
 
@@ -49,9 +55,8 @@
   </html>
 </html>
 
-
 <body>
-  <div id="app">
+ <div id="app">
     
       <canvas class="fireworks"></canvas>
       <style>
@@ -66,7 +71,8 @@
       
       
     <main class="content on">
-      <section class="outer">
+      <div id="pjax-container">
+        <section class="outer">
   
   
   <article class="articles">
@@ -135,6 +141,7 @@
 
   
 </section>
+      </div>
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -174,9 +181,10 @@
         <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
         
       </li>
+
     </ul>
   </div>
-</footer>    
+</footer>
     </main>
     <div class="float_btns">
       <div class="totop" id="totop">
@@ -188,6 +196,7 @@
 </div>
 
     </div>
+
     <aside class="sidebar on">
       <button class="navbar-toggle"></button>
 <nav class="navbar">
@@ -498,7 +507,7 @@
     
     
 
-  </div>
+ </div>
 </body>
 
 </html>
