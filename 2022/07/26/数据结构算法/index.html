@@ -1,9 +1,11 @@
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
 <script>
- $(document).pjax('a[target!=_blank]', '#pjax-container',{fragment:'#pjax-container', timeout:8000})
+  $(document).pjax('a[target!=_blank]', '#pjax-container',{fragment:'#pjax-container', timeout:8000});
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/minivaline@6"></script>
 </script>
-
 <!DOCTYPE html>
 
 
@@ -56,6 +58,7 @@
 </html>
 
 <body>
+
  <div id="app">
     
       <canvas class="fireworks"></canvas>
@@ -71,7 +74,7 @@
       
       
     <main class="content on">
-      <div id="pjax-container">
+       <div id="pjax-container">
         <section class="outer">
   <article
   id="post-数据结构算法"
@@ -338,8 +341,10 @@
 <div id="vcomments-box">
   <div id="vcomments"></div>
 </div>
+<div class=".pjax-reload">
 <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
 <script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+</div>
 <script>
   new Valine({
     el: "#vcomments",
@@ -350,13 +355,14 @@
     placeholder: "给我的文章加点评论吧~",
     recordIP: true,
   });
-  const infoEle = document.querySelector("#vcomments .info");
+    //const infoEle = document.querySelector("#vcomments .info");
   if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
     infoEle.childNodes.forEach(function (item) {
       item.parentNode.removeChild(item);
     });
   }
 </script>
+
 <style>
   #vcomments-box {
     padding: 5px 30px;
@@ -384,19 +390,21 @@
  
    
     
-    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div class=".pjax-reload"><script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script></div>
     <div id="twikoo" class="twikoo"></div>
+
     <script>
         twikoo.init({
             envId: ""
         })
     </script>
+
  
+
 </article>
 
 </section>
-      </div>
-      <footer class="footer">
+        <footer class="footer">
   <div class="outer">
     <ul>
       <li>
@@ -439,7 +447,24 @@
     </ul>
   </div>
 </footer>
+        <script type="text/javascript">
+           function pjax_reloadValine(){
+               var infoEle = document.querySelector("#vcomments .info");
+           }
+           function pjax_reloadMini(){
+               var infoEle = document.querySelector('#mvcomments .info');
+           }
+               $(document).on('pjax:complete', function() {
+                  pjax_reloadValine;
+                  gitalk.render('gitalk-container')
+                  pjax_reloadMini;
+                  twikoo.init({envId: ""});
+               })
+        </script>
+       </div>
+
     </main>
+
     <div class="float_btns">
       <div class="totop" id="totop">
   <i class="ri-arrow-up-line"></i>
@@ -756,7 +781,6 @@
   }
 </script>
 
-
     
     <div id="music">
     
@@ -779,5 +803,4 @@
 
  </div>
 </body>
-
 </html>
