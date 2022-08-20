@@ -22,9 +22,7 @@
 <span id="more"></span>
 
 <h1 id="二、稀疏数组"><a href="#二、稀疏数组" class="headerlink" title="二、稀疏数组"></a>二、稀疏数组</h1><p>就是对二维数组的压缩，第一行记录行列数和值总数，下面记录有意义的值的行列位置和值</p>
- <img src="C:\Users\FANG\AppData\Roaming\Typora\typora-user-images\image-20220713003447466.png" alt="image-20220713003447466" style="zoom:50%;" />
-
-
+<p> <img src="C:/Users/FANG/AppData/Roaming/Typora/typora-user-images/image-20220713003447466.png"></p>
 <blockquote>
 <p>转换思路：<br>   二维数组 转 稀疏数组<br>1.遍历原始二维数组，得到有效数据的个数sum<br>2.创建稀疏数组sparseArr&#x3D;int[sum+1][3]<br>3.将有效数组的有效数据存入到sparseArr</p>
 <p>稀疏数组 转 二维数组<br>1.读取稀疏数组第一行，根据第一行创建原始二维数组chessArr2&#x3D;int[6][7]<br>2.读取稀疏数组后面的数据，赋给二维数组</p>
@@ -90,7 +88,7 @@
 
 
 
-<h4 id="5-栈（stack）"><a href="#5-栈（stack）" class="headerlink" title="5.栈（stack）"></a>5.栈（stack）</h4><p>出栈pop，入栈push</p>
+<h3 id="五、栈（stack）"><a href="#五、栈（stack）" class="headerlink" title="五、栈（stack）"></a>五、栈（stack）</h3><p>出栈pop，入栈push</p>
 <img src="C:\Users\FANG\AppData\Roaming\Typora\typora-user-images\image-20220716111858662.png" alt="image-20220716111858662" style="zoom:80%;" />
 
 <h5 id="5-1-数组模拟栈"><a href="#5-1-数组模拟栈" class="headerlink" title="5.1.数组模拟栈"></a>5.1.数组模拟栈</h5><img src="C:\Users\FANG\AppData\Roaming\Typora\typora-user-images\image-20220716112400723.png" alt="image-20220716112400723" style="zoom:80%;" />
@@ -183,6 +181,410 @@
       <tags>
         <tag>数据结构</tag>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL</title>
+    <url>/2022/08/20/mysql/</url>
+    <content><![CDATA[<h2 id="一、基础概念"><a href="#一、基础概念" class="headerlink" title="一、基础概念"></a>一、基础概念</h2><h3 id="1-数据库相关概念"><a href="#1-数据库相关概念" class="headerlink" title="1.数据库相关概念"></a>1.数据库相关概念</h3><p>数据库的好处：可以持久化数据到本地；结构化查询</p>
+<p>DB：数据库，存储数据的容器</p>
+<p>DBMS ：数据库管理系统，又称为数据库软件或数据库产品，用于创建或管理DB</p>
+<p>SQL：结构化查询语言，用于和数据库通信的语言，不是某个数据库软件特有的，而是几乎所有主流数据库软件通用的语言。</p>
+<p>常见的数据库管理系统：mysql、oracle、db2、sql server</p>
+<span id="more"></span>
+
+<h3 id="2-MySQL介绍"><a href="#2-MySQL介绍" class="headerlink" title="2.MySQL介绍"></a>2.MySQL介绍</h3><p>优点：开源、免费、成本低；性能高、移植性好；体积小便于安装</p>
+<p>安装：属于c&#x2F;s架构的软件，一般安装服务端</p>
+<p>启动和停止：命令<code>net start 服务名</code> <code>net stop 服务名</code> 或 计算机管理服务</p>
+<p>登录和退出：命令<code>mysql 【-h 主机名 -p 端口号】 -u用户名 -p密码</code>  <code>exit</code>或ctrl+c</p>
+<h2 id="二、DQL语言"><a href="#二、DQL语言" class="headerlink" title="二、DQL语言"></a>二、DQL语言</h2><h3 id="1-常见命令"><a href="#1-常见命令" class="headerlink" title="1.常见命令"></a>1.常见命令</h3><p>使用库 ：<code>use test;</code></p>
+<p>显示表结构：<code>desc student;</code></p>
+<h3 id="2-基础查询"><a href="#2-基础查询" class="headerlink" title="2.基础查询"></a>2.基础查询</h3><ul>
+<li><p><strong>查询字段信息</strong></p>
+<p><code>select id,name from student;</code></p>
+<p>可以在字段上加上&#96;&#96;号，用于区分内置关键字</p>
+</li>
+<li><p><strong>查询常量值</strong></p>
+<p><code>select 100;</code></p>
+<p><code>select &#39;john&#39;;</code></p>
+</li>
+<li><p><strong>查询表达式</strong></p>
+<p><code>select 100%98;</code></p>
+</li>
+<li><p><strong>查询函数</strong></p>
+<p><code>select version();</code></p>
+</li>
+</ul>
+<h4 id="2-1-起别名"><a href="#2-1-起别名" class="headerlink" title="2.1.起别名"></a>2.1.起别名</h4><p><code>select sname as 姓名,sex as 性别 from student;</code></p>
+<p><code>select sname 姓名,sex 性别 from student;</code> 可以省略as</p>
+<p>如果别名中与内置名冲突，就用双引号包裹</p>
+<h4 id="2-2-去重"><a href="#2-2-去重" class="headerlink" title="2.2.去重"></a>2.2.去重</h4><p>在字段前加<u>distinc</u>t关键字</p>
+<p><code>select distinct stu_age from student;</code></p>
+<h4 id="2-3-合并字段"><a href="#2-3-合并字段" class="headerlink" title="2.3.合并字段"></a>2.3.合并字段</h4><p>+号：mysql中的+号就是运算，字符串被转换为0进行运算，null加任何结果为null</p>
+<p>**concat()**：字符串的拼接</p>
+<p><code>select concat(last_name,first_name) as 姓名 from student;</code></p>
+<p>如果有字段为null，需要使用ifnul()来设置默认值</p>
+<p><code>select concat(last_name,ifnull(first_name,0)) as 姓名 from student;</code></p>
+<h3 id="3-条件查询【where】"><a href="#3-条件查询【where】" class="headerlink" title="3.条件查询【where】"></a>3.条件查询【where】</h3><p><code>select 字段 from 表名 where 筛选条件;</code></p>
+<h4 id="3-1运算符"><a href="#3-1运算符" class="headerlink" title="3.1运算符"></a>3.1运算符</h4><p><strong>3.1.1条件运算符</strong></p>
+<p>​		&gt;、&lt; 、&#x3D; 、&lt;&gt;、&gt;&#x3D;、&lt;&#x3D;</p>
+<p>例：查询工资大于12000的员工信息</p>
+<p>​		<code>select * from employees where salary&gt;12000;</code></p>
+<p><strong>3.1.2逻辑运算符</strong></p>
+<p>​		and、or、not</p>
+<p>例：工资不在90-100，或奖金大于100的员工信息</p>
+<p>​		<code>select * from employees where salary&lt;90 or salary&gt;110 or commission &gt; 100;</code> </p>
+<h4 id="3-2模糊查询"><a href="#3-2模糊查询" class="headerlink" title="3.2模糊查询"></a>3.2模糊查询</h4><p>​	   like、between and、in、is null</p>
+<ul>
+<li><p><strong>like</strong></p>
+<p>字符需要用’’引起来，%为任意位的通配符，_为单个字符通配符</p>
+<p>如果需要模糊查询带_的，需要进行转义，可以使用escape ‘$’</p>
+<p>例：查询名字中包含a的员工信息</p>
+<p><code>select * from employees where lastname like &#39;%a%&#39;;</code></p>
+</li>
+<li><p><strong>betwen and</strong>   等价于&gt;&#x3D;  &lt;&#x3D;</p>
+</li>
+<li><p><strong>in</strong> 类似在{}集合里</p>
+<p>例：查询专业为计科、信管、网安的学生信息</p>
+<p><code>select * from student where stu_zy in (&#39;计科&#39;,&#39;信管&#39;,&#39;网安&#39;);</code></p>
+</li>
+<li><p><strong>is null</strong> 查询空值，不能用&#x3D; null，必须用is null</p>
+<p>例：查询没有成绩的学生信息</p>
+<p><code>select * from student where grade is null; </code></p>
+<p>安全等于&lt;&#x3D;&gt;：兼容判断普通值和null值。不常用因为可读性较差。</p>
+</li>
+</ul>
+<h3 id="4-排序查询-【order-by】"><a href="#4-排序查询-【order-by】" class="headerlink" title="4.排序查询 【order by】"></a>4.排序查询 【order by】</h3><p><code>select 字段 from 表名 order by 字段 asc(默认可不写)/desc;</code></p>
+<p>例：按年薪的排序显示员工的信息和年薪</p>
+<p><code>select *,salary*12 年薪 from employees order by salary*12;</code>   按表达式排序</p>
+<p><code>select *,salary*12 年薪 from employees order by 年薪;</code>   按别名排序</p>
+<p>例：按姓名长度进行倒序排序，显示姓名和工资</p>
+<p><code>select name,salary from employees order by length(name) desc;</code>  按函数排序</p>
+<p>例：查询员信息，要求先按工资升序，再按员工编号降序</p>
+<p><code>select * from employees order by salary asc,id desc;</code> 多字段排序</p>
+<p>查询顺序：from 表 ——&gt; where ——&gt; select ——&gt; order by</p>
+<h3 id="5-常见函数"><a href="#5-常见函数" class="headerlink" title="5.常见函数"></a>5.常见函数</h3><p> 单行函数：做数据处理，如concat、length、ifnull等</p>
+<p> 分组函数：做统计使用，又称为统计函数、聚合函数、组函数</p>
+<h4 id="5-1单行函数："><a href="#5-1单行函数：" class="headerlink" title="5.1单行函数："></a>5.1单行函数：</h4><p>​	做数据处理，如concat、length、ifnull等</p>
+<h5 id="5-1-1字符函数："><a href="#5-1-1字符函数：" class="headerlink" title="5.1.1字符函数："></a>5.1.1字符函数：</h5><ul>
+<li><p>length 获取参数的字节个数</p>
+</li>
+<li><p>concat 字符串拼接</p>
+</li>
+<li><p>upper、lower：大小写转换</p>
+</li>
+</ul>
+<p>例：将姓变大写，名变小写，然后拼接</p>
+<p><code>select concat(upper(last_name),lower(first_name)) 姓名 from employees;</code></p>
+<ul>
+<li><p>substr、substring 字符串截取，索引从1开始</p>
+<p>substr(‘123456’,5)      结果为56</p>
+<p>substr(‘123456’,2,3)   结果为234    3为字符长度不是字节长度</p>
+</li>
+<li><p>instr 子串在字符串中的起始索引</p>
+<p>substr(‘123456’,23)  结果为2</p>
+</li>
+<li><p>trim 去掉字符串前后的字符，默认为去空格 </p>
+<p>trim(‘  123   ‘)   结果为123</p>
+<p>trim(‘a’ from ‘aaa123aaa456aaa’) 结果为 123aaa456</p>
+</li>
+<li><p>lpad&#x2F;rpad 补齐字符串填充</p>
+<p>lpad(‘fsq’,6,’1’)  结果为111fsq</p>
+</li>
+<li><p>repalce 替换</p>
+<p>replace(‘fsq123fsq’,’123’,’fsq’) 结果为fsqfsqfsq</p>
+</li>
+</ul>
+<h5 id="5-1-2数学函数"><a href="#5-1-2数学函数" class="headerlink" title="5.1.2数学函数"></a>5.1.2数学函数</h5><ul>
+<li><p><strong>round</strong> 四舍五入</p>
+<p>round(1.567,2)  保留小数点后两位</p>
+</li>
+<li><p><strong>ceil</strong> 向上取整，返回大于等于该参数的最小整数</p>
+<p>ceil(1.02)  结果为2</p>
+</li>
+<li><p><strong>floor</strong> 向下取整，同ceil</p>
+</li>
+<li><p><strong>truncate</strong> 截断</p>
+<p>truncate(1.6777,1)  结果为1.6</p>
+</li>
+<li><p><strong>mod</strong> 取余数</p>
+</li>
+<li><p>rand 随机数</p>
+</li>
+</ul>
+<h5 id="5-1-3日期函数"><a href="#5-1-3日期函数" class="headerlink" title="5.1.3日期函数"></a>5.1.3日期函数</h5><ul>
+<li><p>now 返回当前系统的日期+时间</p>
+</li>
+<li><p>curdate 返回系统的日期</p>
+</li>
+<li><p>curtime 返回当前时间</p>
+</li>
+<li><p>year(now())  取年  </p>
+</li>
+<li><p>month() 取月 monthname() 月的英文</p>
+</li>
+<li><p>str_to_date()：字符转日期，需要格式控制</p>
+<p>例：str_to_date(‘2000-06-21’,’%y-%c-%d’)   结果为00-6-21</p>
+<p>%Y 四位年份      %y两位年份</p>
+<p>%m 月份（01月）    %c 月份（1月）</p>
+<p>%d 日</p>
+<p>%H 时（24小时制） %h时（12小时制）</p>
+<p>%i 分钟</p>
+<p>%s秒</p>
+</li>
+<li><p>date_format：日期转字符</p>
+</li>
+<li><p>datediff(‘日期1’,’日期2’)  日期相隔时间</p>
+</li>
+</ul>
+<h5 id="5-1-4其他函数"><a href="#5-1-4其他函数" class="headerlink" title="5.1.4其他函数"></a>5.1.4其他函数</h5><ul>
+<li><p>version 查看版本号</p>
+</li>
+<li><p>database 当前数据库</p>
+</li>
+<li><p>user 当前用户</p>
+</li>
+<li><p>password 返回该字符的密码形式，加密成密文</p>
+</li>
+<li><p>md5() md5加密</p>
+</li>
+<li><p>exists() 判断是否有查询结果</p>
+</li>
+</ul>
+<h5 id="5-1-5流程控制函数"><a href="#5-1-5流程控制函数" class="headerlink" title="5.1.5流程控制函数"></a>5.1.5流程控制函数</h5><ul>
+<li><p>if </p>
+<p>if(10&gt;5,’大’,’小’) </p>
+</li>
+<li><p>case  ：类似switch case  适合做等值判断</p>
+<p>【case 要判断的字段或表达式  when 常量1 then 要显示值或语句 …  else 要显示值或语句 end】</p>
+<p><em>例</em>：查询员工的工资，要求部门号&#x3D;30，显示工资1.1倍，部门号&#x3D;40，显示工资1.2倍，部门号&#x3D;40，显示工资1.3倍，其他为原始工资</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select departmanet_id,salary 原始工资,</span><br><span class="line">	case department_id </span><br><span class="line">	when 30 then salary*1.1</span><br><span class="line">	when 40 then salary*1.2</span><br><span class="line">	when 50 then salary*1.3</span><br><span class="line">	else salary</span><br><span class="line">	end as 新工资 from employees;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>case 第二种使用  类似多重if  适合区间判断</p>
+<p>【case when 条件1 then 要显示的值或语句1 when… else 要显示的值或语句 end】</p>
+<p><em>例</em>：查询员工的工资情况，如果工资&gt;20000,显示A级别；如果工资&gt;15000，显示B级别；如果工资&gt;10000,显示C级别；否则，显示级别</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select salary,</span><br><span class="line">case </span><br><span class="line">	 when salary&gt;20000 then &#x27;A&#x27;</span><br><span class="line">     when salary&gt;15000 then &#x27;B&#x27;</span><br><span class="line">     when salary&gt;10000 then &#x27;C&#x27;</span><br><span class="line">     else &#x27;D&#x27;</span><br><span class="line">     end as 工资级别</span><br><span class="line">from employees;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="5-2分组函数"><a href="#5-2分组函数" class="headerlink" title="5.2分组函数"></a>5.2分组函数</h4><p>​	做统计使用，又称为统计函数、聚合函数、组函数</p>
+<p>​    注意：null值被忽略，不参与计算；要求结果为规则表格</p>
+<p>​    可以和distinct搭配使用 select  sum(distinct 字段)from 表</p>
+<ul>
+<li><p>sum 求和         数值型</p>
+</li>
+<li><p>avg 平均值       数值型</p>
+</li>
+<li><p>max 最大值    min最小值      数值、字符、日期</p>
+</li>
+<li><p>count 统计非空个数   都支持</p>
+<p>一般使用count(*)来统计行数，就是一行只要有一个字段没有null值就被统计在内，也可以使用count(1)</p>
+</li>
+</ul>
+<h3 id="6-分组查询-【group-by】【having】"><a href="#6-分组查询-【group-by】【having】" class="headerlink" title="6.分组查询 【group by】【having】"></a>6.分组查询 【group by】【having】</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select 分组函数,列（要求出现在group by后面）</span><br><span class="line">from 表</span><br><span class="line">【where 筛选条件】</span><br><span class="line">group by 分组的列表</span><br><span class="line">【having 分组后的筛选】</span><br><span class="line">【order by 排序列表 asc/desc】</span><br></pre></td></tr></table></figure>
+
+<p>having 关键字用于分组后的筛选，数据源为分组后的结果集，分组函数做条件肯定放在having子句中</p>
+<ul>
+<li>按字段分组</li>
+</ul>
+<p>例：查询每个工种的最高工资</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select max(salary),job_id</span><br><span class="line">from employees</span><br><span class="line">group by job_id;</span><br></pre></td></tr></table></figure>
+
+<p>例：查询员工个数&gt;2的部门 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select count(*),department_id</span><br><span class="line">from employees</span><br><span class="line">group by department_id</span><br><span class="line">having count count(*) &gt; 2;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>按表达式或函数分组</p>
+<p>例：按员工姓名的长度分组，查询每一组的员工个数，筛选员工个数&gt;5的有哪些</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select count(*),langth(last_name)</span><br><span class="line">from employees</span><br><span class="line">group by langth(last_name)</span><br><span class="line">having count(*) &gt; 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按多个字段分组</p>
+<p>例：查询每个部门每个工种的员工的平均工资</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select avg(salary),department_id,job_id</span><br><span class="line">from employees</span><br><span class="line">group by department_id,job_id;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加排序</p>
+<p>例：查询每个部门每个工种的员工的平均工资，按工资从高到底显示</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">avg</span>(salary),department_id,job_id</span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> department_id,job_id;</span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="built_in">avg</span>(salary) <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="7-连接查询"><a href="#7-连接查询" class="headerlink" title="7.连接查询"></a>7.连接查询</h3><p>笛卡尔积，表1 m行，表2 n行，结果有m*n行</p>
+<h4 id="7-1sql92版本"><a href="#7-1sql92版本" class="headerlink" title="7.1sql92版本"></a>7.1sql92版本</h4><p>​	sql92只有内连接：等值连接、非等值连接、自连接</p>
+<ul>
+<li><p><strong>等值连接</strong></p>
+<p>需要为表起别名，起了别名后select后的字段不可用用原表名</p>
+<p>例：查询员工名、工种号、工种名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> last_name,e.job_id,job_title</span><br><span class="line"><span class="keyword">from</span> employees e,jobs j</span><br><span class="line"><span class="keyword">where</span> e.job_id <span class="operator">=</span> j.job_id;</span><br></pre></td></tr></table></figure>
+
+<p>三表连接：where e.id &#x3D; j.id and j.id&#x3D; l.id</p>
+</li>
+<li><p><strong>非等值连接</strong></p>
+<p>例：查询员工的工资和工资级别</p>
+<p>员工表：salary       工资级别表：grade_level, lowest_sal , highest_sal</p>
+<p>查询员工的工资和工资级别</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> employees_id,salary,grade_level</span><br><span class="line"><span class="keyword">from</span> employees e,job_grades</span><br><span class="line"><span class="keyword">where</span> salary <span class="keyword">between</span> lowest_sal <span class="keyword">and</span> highest_sal;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>自连接</strong></p>
+<p>本表的两个字段相连接，其实就是查两次表，借助别名对本表进行区分</p>
+<p>例：查询员工名和上级领导的名字，员工和领导在一个表里</p>
+<p>员工表：employee_id ,  lastname , manager_id</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select m.lastname,n.lastname</span><br><span class="line">from employees m,employees n</span><br><span class="line">where m.manager_id = n.employee_id</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="7-2sql99版本"><a href="#7-2sql99版本" class="headerlink" title="7.2sql99版本"></a>7.2sql99版本</h4><p>​	sql99分为内连接、外连接、交叉连接</p>
+<p>   其实就是将连接条件从where中分离出来，使用关键字on</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select 查询列表</span><br><span class="line">from 表1 别名</span><br><span class="line">连接类型(默认为inner) join 表2 别名</span><br><span class="line">on 连接条件</span><br><span class="line">【where 筛选条件】</span><br><span class="line">【group by 分组的列表】</span><br><span class="line">【having 分组后的筛选】</span><br><span class="line">【order by 排序列表 asc/desc】</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-2-1内连接"><a href="#7-2-1内连接" class="headerlink" title="7.2.1内连接"></a>7.2.1<strong>内连接</strong></h5><p>​	连接类型 为 <strong>inner</strong>，内连接同92版本，只是语法不同</p>
+<p>​	例：查询员工名、部门名</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> last_name,department_name</span><br><span class="line"><span class="keyword">from</span> employees e</span><br><span class="line">(<span class="keyword">inner</span>) <span class="keyword">join</span> department d</span><br><span class="line"><span class="keyword">on</span> e.department_id <span class="operator">=</span> d.department_id;</span><br></pre></td></tr></table></figure>
+
+<p>多表连接：继续inner join 表3 on 连接条件</p>
+<h5 id="7-2-2外连接"><a href="#7-2-2外连接" class="headerlink" title="7.2.2外连接"></a>7.2.2<strong>外连接</strong></h5><p>​	连接类型为 <strong>left outer &#x2F; right outer</strong></p>
+<p>​	应用：用于查询一个表中有，另一个表中没有的记录</p>
+<p>​	特点：外连接的查询结果 &#x3D; 内连接 + 主表中有但从表没有的null填充</p>
+<p>​	分类：左外连接和右外连接，用于切换主从表</p>
+<p>例：查询那个部门没有员工</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> department_name</span><br><span class="line"><span class="keyword">from</span> department d</span><br><span class="line"><span class="keyword">left</span> <span class="keyword">outer</span> <span class="keyword">join</span> employees e</span><br><span class="line"><span class="keyword">on</span> d.department_id <span class="operator">=</span> e.department_id</span><br><span class="line"><span class="keyword">where</span> e.employee_id <span class="keyword">is</span> <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-2-3全外连接"><a href="#7-2-3全外连接" class="headerlink" title="7.2.3全外连接"></a>7.2.3全外连接</h5><p>​	连接类型为<strong>full</strong></p>
+<p>​	内连接+左外连接+右外连接</p>
+<h5 id="7-2-4交叉连接"><a href="#7-2-4交叉连接" class="headerlink" title="7.2.4交叉连接"></a>7.2.4交叉连接</h5><p>​	连接类型为<strong>cross</strong></p>
+<p>​	其实就是笛卡尔乘积</p>
+<p><img src="/mysql.assets/image-20220819153038304.png" alt="image-20220819153038304"></p>
+<h3 id="8-子查询"><a href="#8-子查询" class="headerlink" title="8.子查询"></a>8.子查询</h3><p>​	出现在其他语句中的select语句，称为子查询或内查询</p>
+<img src="mysql.assets/image-20220819155001375.png" alt="image-20220819155001375" style="zoom:50%;float:left" />
+
+<h4 id="8-1标量子查询-单行子查询"><a href="#8-1标量子查询-单行子查询" class="headerlink" title="8.1标量子查询(单行子查询)"></a>8.1标量子查询(单行子查询)</h4><p>​	搭配单行操作符使用，&gt;、&lt;、 &gt;&#x3D;、&lt;&#x3D;、&#x3D;、&lt;&gt; </p>
+<p>例：查询工资比Abel高的员工信息</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">where</span> salary <span class="operator">&gt;</span> (</span><br><span class="line">    <span class="keyword">select</span> salary </span><br><span class="line">    <span class="keyword">from</span> employees </span><br><span class="line">    <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">&#x27;Abel&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>例：查询最低工资大于<u>50号部门的最低工资</u>的部门id和其最低工资</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> department_id,<span class="built_in">min</span>(salary)</span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> department_id</span><br><span class="line"><span class="keyword">having</span> <span class="built_in">min</span>(salary) <span class="operator">&gt;</span> (</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">min</span>(salary)</span><br><span class="line">    <span class="keyword">from</span> employee</span><br><span class="line">    <span class="keyword">where</span> department_id  <span class="operator">=</span> <span class="number">50</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="8-2列子查询-多行子查询"><a href="#8-2列子查询-多行子查询" class="headerlink" title="8.2列子查询(多行子查询)"></a>8.2列子查询(多行子查询)</h4><p>​	搭配多行操作符使用，in、any&#x2F;some、all</p>
+<p>例：查询location_id是1400或1700的部门编号</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> lastname</span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">where</span> department_id <span class="keyword">in</span> (</span><br><span class="line">	<span class="keyword">select</span> <span class="keyword">distinct</span> department_id</span><br><span class="line">	<span class="keyword">from</span> departments</span><br><span class="line">	<span class="keyword">where</span> location_id <span class="keyword">in</span> (<span class="number">1400</span>,<span class="number">1700</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>例：查询其他部门中比<u>job-id为’IT-PROG’ 部门任一工资低</u>的员工的员工号、姓名、job_id以及salary</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> employee_id,lastname,job_id,salary</span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line"><span class="keyword">where</span> salary <span class="operator">&lt;</span> (</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">max</span>(salary)</span><br><span class="line">	<span class="keyword">from</span> employees</span><br><span class="line">	<span class="keyword">where</span> job_id <span class="operator">=</span> <span class="string">&#x27;IT_PROG&#x27;</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">and</span> job_id <span class="operator">&lt;&gt;</span> <span class="string">&#x27;IT_PROG&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-2行子查询-多列查询"><a href="#8-2行子查询-多列查询" class="headerlink" title="8.2行子查询(多列查询)"></a>8.2行子查询(多列查询)</h4><p>例：查询员工编号最小并且工资最高的员工信息</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">#常规写法</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line"><span class="keyword">where</span> employee_id <span class="operator">=</span> (</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">min</span>(employee_id)</span><br><span class="line">	<span class="keyword">from</span> employees</span><br><span class="line">)</span><br><span class="line"><span class="keyword">and</span> salary <span class="operator">=</span> (</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">max</span>(salary)</span><br><span class="line">    <span class="keyword">from</span> employee</span><br><span class="line">);</span><br><span class="line">#行子查询写法</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">from</span> employee</span><br><span class="line"><span class="keyword">where</span> (employee_id,salary) <span class="operator">=</span> (</span><br><span class="line">	<span class="keyword">select</span> <span class="built_in">min</span>(employee_id),<span class="built_in">max</span>(salary)</span><br><span class="line">	<span class="keyword">from</span> employees</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="9-分页查询【limit】"><a href="#9-分页查询【limit】" class="headerlink" title="9.分页查询【limit】"></a>9.分页查询【limit】</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select 查询列表</span><br><span class="line">from 表1 别名</span><br><span class="line">【连接类型(默认为inner) join 表2 别名</span><br><span class="line">on 连接条件】</span><br><span class="line">【where 筛选条件】</span><br><span class="line">【group by 分组的列表】</span><br><span class="line">【having 分组后的筛选】</span><br><span class="line">【order by 排序列表 asc/desc】</span><br><span class="line">limit offset(可不加),size;</span><br></pre></td></tr></table></figure>
+
+<p>offset 显示条目的起始索引，起始索引从0开始，可不加默认从0开始</p>
+<p>size 要显示的条目个数</p>
+<p>例：查询前5条员工的信息 </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line">limit <span class="number">5</span>; #或写成limit <span class="number">0</span>,<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>例：查询第11-25员工的信息 </p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> </span><br><span class="line"><span class="keyword">from</span> employees</span><br><span class="line">limit <span class="number">10</span>,<span class="number">15</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="10-联合查询【union】"><a href="#10-联合查询【union】" class="headerlink" title="10.联合查询【union】"></a>10.联合查询【union】</h3><p>合并：将多条语句的结果合并成一个结果</p>
+<p>应用场景：需要从多个表中各自查询合并成一个表</p>
+<p>注意：查询的列数需要保持一致；union结果自动去重，union all结果不去重</p>
+<p>例：查询中国的男性用户和外国的男性用户</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> id,cname,csex <span class="keyword">from</span> t_ca <span class="keyword">where</span> csex<span class="operator">=</span><span class="string">&#x27;男&#x27;</span></span><br><span class="line"><span class="keyword">union</span></span><br><span class="line"><span class="keyword">select</span> t_id,tName,tGender <span class="keyword">from</span> u_ca <span class="keyword">where</span> usex<span class="operator">=</span><span class="string">&#x27;male&#x27;</span>;</span><br><span class="line">#查询结果的字段名为id,cname,csex</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、DML语言（数据管理）"><a href="#三、DML语言（数据管理）" class="headerlink" title="三、DML语言（数据管理）"></a>三、DML语言（数据管理）</h2><h3 id="1-插入insert"><a href="#1-插入insert" class="headerlink" title="1.插入insert"></a>1.插入insert</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">方式一:</span><br><span class="line">insert into 表名(列名,...) values(值1,...);</span><br><span class="line"></span><br><span class="line">方式二:</span><br><span class="line">insert into 表名 set 列名1=值1,列名2=值2,...;</span><br></pre></td></tr></table></figure>
+
+<p>注意：插入值的类型与列的类型一致或兼容，字符型日期型的要用’’连接，字段和值的个数要一致</p>
+<ul>
+<li><p>方式一支持批量插入，方式二不支持</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表名(列名,...) values(1,...),</span><br><span class="line">values(2,...),</span><br><span class="line">values(3,...);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方式一支持子查询，方式二不支持</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into 表1(列名,...)</span><br><span class="line">select (列名) from 表2;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="2-更新update"><a href="#2-更新update" class="headerlink" title="2.更新update"></a>2.更新update</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#更新单表</span><br><span class="line">update 表名 set 字段1=值1,字段2=值2,... where 查询条件;</span><br><span class="line"></span><br><span class="line">#更新多表</span><br><span class="line">update 表1 连接类型 join 表2 on 连接条件 </span><br><span class="line">set 字段1=值1,字段2=值2,... where 查询条件;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-删除delete-x2F-truncate"><a href="#3-删除delete-x2F-truncate" class="headerlink" title="3.删除delete&#x2F;truncate"></a>3.删除delete&#x2F;truncate</h3><p><strong>3.1使用delete</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#删除单表</span><br><span class="line">  delete from 表名 where 筛选条件 【limit 条目数】;</span><br><span class="line">  </span><br><span class="line">#级联删除</span><br><span class="line">  delete 别名1,别名2 from 表1 别名1 连接类型 join 表2 别名2 on 连接条件 where 筛选条件;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3.2使用truncate</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">truncate table 表名;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>delete和truncate两者区别</p>
+<p>1.truncate删除后，如果再插入，标识列从1开始；delete标识列从断点开始</p>
+<p>2.delete可以添加筛选条件，truncate不行</p>
+<p>3.truncate效率较高</p>
+<p>4.truncate没有返回值，delete可以返回受影响的行数</p>
+<p>5.truncate不可以回滚，delete可以</p>
+</li>
+</ul>
+<h2 id="四、DDL语言"><a href="#四、DDL语言" class="headerlink" title="四、DDL语言"></a>四、DDL语言</h2><h3 id="1-库的管理"><a href="#1-库的管理" class="headerlink" title="1.库的管理"></a>1.库的管理</h3><p><strong>1.1创建库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create database 【if not exists】 库名 【character set 字符集】;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.2.修改库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alter database 库名 character set 字符集名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.3.删除库</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop database 【if exists】 库名;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-表的管理"><a href="#2-表的管理" class="headerlink" title="2.表的管理"></a>2.表的管理</h3><p><strong>2.1创建表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">create table 【if not exists】 表名(</span><br><span class="line">	字段1 字段类型 【约束】,</span><br><span class="line">	字段2 字段类型 【约束】,</span><br><span class="line">	...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.2修改表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#添加列</span><br><span class="line">alter table 表名 add column 列名 类型 【first|after 字段名】;</span><br><span class="line"></span><br><span class="line">#修改列类型或约束</span><br><span class="line">alter table 表名 modify column 列名 新类型 【新约束】;</span><br><span class="line"></span><br><span class="line">#修改列名</span><br><span class="line">alter table 表名 change column 列名 新列名;</span><br><span class="line"></span><br><span class="line">#删除某列</span><br><span class="line">alter table 表名 drop column 列名;</span><br><span class="line"></span><br><span class="line">#修改表名</span><br><span class="line">alter table 表名 rename 新表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.3删除表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">drop table 【if exsits】 表名;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.4复制表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#复制表的结构</span><br><span class="line">create table 表名 like 旧表;</span><br><span class="line"></span><br><span class="line">#复制表的结构+数据</span><br><span class="line">create table 表名 from 旧表 【where 筛选条件】;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-数据类型"><a href="#3-数据类型" class="headerlink" title="3.数据类型"></a>3.数据类型</h3><p><strong>3.1数值型</strong></p>
+<ul>
+<li><p>整形：tinyint、smallint、medimint、int&#x2F;integer、bigint</p>
+<p>特点：1.可以设置无符号和有符号，默认有符号，通过unsigned设置无符号</p>
+<p>​			2.如果超过范围，会报out or range异常，插入临界值</p>
+<p>​	        3.长度可以不指定，默认会有一个长度，默认是最大宽度，如果不够左边用0填充，但需要搭配zerofill，并且默认变为无符号整形</p>
+</li>
+<li><p>浮点型：定点数：decimal(M,D)    浮点数：float(M,D) 、double(M,D)</p>
+<p>特点：1.M代表整数补位+小数部位的个数，D代表小数位数</p>
+<p>​			2.如果超出范围，则报out or range异常，并且插入临界值</p>
+<p>​			3.M和D都可以省略，但对于定点数，M默认为10，D默认为0</p>
+<p>​			4.如果精度要求较高，则优先考虑使用定点数</p>
+</li>
+</ul>
+<p><strong>3.2字符型</strong></p>
+<p>char、vachar、binary、varbinary、enum、set、text、blob</p>
+<p>char：固定长度的字符，写法为char(M)，最大长度不能超过M，M可以省略，默认为1</p>
+<p>varchar：可变长度的字符，写法为varchar(M)，最大长度不能超过M，M不可以省略</p>
+<p><strong>3.3日期型</strong></p>
+<p>year年、date日期、time时间、datetime日期时间</p>
+<h3 id="4-常见约束"><a href="#4-常见约束" class="headerlink" title="4.常见约束"></a>4.常见约束</h3><h2 id="五、面试题"><a href="#五、面试题" class="headerlink" title="五、面试题"></a>五、面试题</h2><ul>
+<li><p><code>select * from employees;</code>和<code>select * from employees where id like &#39;%%&#39; and name like &#39;%%&#39;;</code>两者一样吗？</p>
+<p>答：不一样，如果name和id字段没有null值就一样，但是可能存在null值。</p>
+</li>
+<li><p>分组查询，分组前筛选和分组后筛选的区别?</p>
+<p>答：</p>
+<p>分组前：关键字—where   筛选的表—原始表    位置—group by 前面</p>
+<p>分组后：关键字—having   筛选的表—分组后的结果    位置—group by 后面</p>
+</li>
+<li><p>delete和truncate的区别</p>
+<p>答：</p>
+<p>1.truncate删除后，如果再插入，标识列从1开始；delete标识列从断点开始</p>
+<p>2.delete可以添加筛选条件，truncate不行</p>
+<p>3.truncate效率较高</p>
+<p>4.truncate没有返回值，delete可以返回受影响的行数</p>
+<p>5.truncate不可以回滚，delete可以</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>

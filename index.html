@@ -2,16 +2,12 @@
 <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
 <script>
   $(document).pjax('a[target!=_blank]', '#pjax-container',{fragment:'#pjax-container', timeout:8000});
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/minivaline@6"></script>
 </script>
 <!DOCTYPE html>
 
 
 <html lang="en">
   
-
     <head>
       <meta charset="utf-8" />
        
@@ -26,7 +22,7 @@
       <title> 个人博客</title>
   <meta name="generator" content="hexo-theme-ayer">
       
-      <link rel="shortcut icon" href="/images/f_avatar.jpg" />
+      <link rel="shortcut icon" href="https://gitee.com/freya47/img/raw/master/img/f_avatar.jpg" />
        
 <link rel="stylesheet" href="/dist/main.css">
 
@@ -171,6 +167,73 @@
     
     
     
+    
+    <article
+  id="post-mysql"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/08/20/mysql/"
+    >MySQL</a> 
+</h2>
+ 
+
+      
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2022/08/20/mysql/" class="article-date">
+  <time datetime="2022-08-19T16:00:00.000Z" itemprop="datePublished">2022-08-20</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+   
+    </div>
+
+      
+    <div class="article-entry" itemprop="articleBody" style="margin-top: -2.5rem">
+       
+  <h2 id="一、基础概念"><a href="#一、基础概念" class="headerlink" title="一、基础概念"></a>一、基础概念</h2><h3 id="1-数据库相关概念"><a href="#1-数据库相关概念" class="headerlink" title="1.数据库相关概念"></a>1.数据库相关概念</h3><p>数据库的好处：可以持久化数据到本地；结构化查询</p>
+<p>DB：数据库，存储数据的容器</p>
+<p>DBMS ：数据库管理系统，又称为数据库软件或数据库产品，用于创建或管理DB</p>
+<p>SQL：结构化查询语言，用于和数据库通信的语言，不是某个数据库软件特有的，而是几乎所有主流数据库软件通用的语言。</p>
+<p>常见的数据库管理系统：mysql、oracle、db2、sql server</p> 
+      <a class="article-more-link" href="/2022/08/20/mysql/"
+        >阅读更多...</a
+      >
+       
+
+
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+
+</article>
+
     
     <article
   id="post-数据结构算法"
@@ -361,20 +424,6 @@
     </ul>
   </div>
 </footer>
-        <script type="text/javascript">
-           function pjax_reloadValine(){
-               var infoEle = document.querySelector("#vcomments .info");
-           }
-           function pjax_reloadMini(){
-               var infoEle = document.querySelector('#mvcomments .info');
-           }
-               $(document).on('pjax:complete', function() {
-                  pjax_reloadValine;
-                  gitalk.render('gitalk-container')
-                  pjax_reloadMini;
-                  twikoo.init({envId: ""});
-               })
-        </script>
        </div>
 
     </main>
@@ -700,5 +749,24 @@
     
 
  </div>
+ <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+ <script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/minivaline@6"></script>
+ <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+ <script>
+        function pjax_reloadValine(){
+                var infoEle = document.querySelector("#vcomments .info");
+        }
+        function pjax_reloadMini(){
+            var infoEle = document.querySelector('#mvcomments .info');
+        }
+        $(document).on('pjax:complete', function() {
+                   pjax_reloadValine;
+                   gitalk.render('gitalk-container')
+                   pjax_reloadMini;
+                   twikoo.init();
+                   var toc = true;
+        });
+</script>
 </body>
 </html>

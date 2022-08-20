@@ -2,16 +2,12 @@
 <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
 <script>
   $(document).pjax('a[target!=_blank]', '#pjax-container',{fragment:'#pjax-container', timeout:8000});
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/minivaline@6"></script>
 </script>
 <!DOCTYPE html>
 
 
 <html lang="en">
   
-
     <head>
       <meta charset="utf-8" />
        
@@ -26,7 +22,7 @@
       <title>友情链接 |  个人博客</title>
   <meta name="generator" content="hexo-theme-ayer">
       
-      <link rel="shortcut icon" href="/images/f_avatar.jpg" />
+      <link rel="shortcut icon" href="https://gitee.com/freya47/img/raw/master/img/f_avatar.jpg" />
        
 <link rel="stylesheet" href="/dist/main.css">
 
@@ -176,20 +172,6 @@
     </ul>
   </div>
 </footer>
-        <script type="text/javascript">
-           function pjax_reloadValine(){
-               var infoEle = document.querySelector("#vcomments .info");
-           }
-           function pjax_reloadMini(){
-               var infoEle = document.querySelector('#mvcomments .info');
-           }
-               $(document).on('pjax:complete', function() {
-                  pjax_reloadValine;
-                  gitalk.render('gitalk-container')
-                  pjax_reloadMini;
-                  twikoo.init({envId: ""});
-               })
-        </script>
        </div>
 
     </main>
@@ -515,5 +497,24 @@
     
 
  </div>
+ <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+ <script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/minivaline@6"></script>
+ <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+ <script>
+        function pjax_reloadValine(){
+                var infoEle = document.querySelector("#vcomments .info");
+        }
+        function pjax_reloadMini(){
+            var infoEle = document.querySelector('#mvcomments .info');
+        }
+        $(document).on('pjax:complete', function() {
+                   pjax_reloadValine;
+                   gitalk.render('gitalk-container')
+                   pjax_reloadMini;
+                   twikoo.init();
+                   var toc = true;
+        });
+</script>
 </body>
 </html>
